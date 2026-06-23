@@ -1,6 +1,6 @@
 backend:
 name: github
-repo: 你的GitHub用户名/你的仓库名
+repo: 375750526-cell/wendan
 branch: main
 
 media_folder: "images"
