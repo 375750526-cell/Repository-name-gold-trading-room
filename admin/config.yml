@@ -1,37 +1,24 @@
 backend:
-name: github
-repo: 375750526-cell/Repository-name-gold-trading-room
-branch: main
+  name: github
+  repo: 375750526-cell/Repository-name-gold-trading-room
+  branch: main
 
-media_folder: "images"
-public_folder: "/images"
+media_folder: "resources"
+public_folder: "/resources"
+
 
 collections:
+  - name: "posts"
+    label: "文章"
+    folder: ""
+    create: true
+    slug: "{{slug}}"
 
-* name: "posts"
-  label: "文章管理"
-  folder: "posts"
-  create: true
-  slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - label: "标题"
+        name: "title"
+        widget: "string"
 
-  fields:
-
-  * label: "标题"
-    name: "title"
-    widget: "string"
-
-  * label: "简介"
-    name: "excerpt"
-    widget: "text"
-
-  * label: "发布日期"
-    name: "date"
-    widget: "datetime"
-
-  * label: "封面图"
-    name: "image"
-    widget: "image"
-
-  * label: "正文"
-    name: "body"
-    widget: "markdown"
+      - label: "正文"
+        name: "body"
+        widget: "markdown"
