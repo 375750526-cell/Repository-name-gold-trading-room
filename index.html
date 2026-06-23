@@ -1,0 +1,615 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黄金作战室</title>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    background:#f5f6f8;
+    font-family:"Microsoft YaHei",sans-serif;
+    color:#333;
+}
+
+
+/* 顶部导航 */
+header{
+    width:100%;
+    height:70px;
+    background:#fff;
+    border-bottom:1px solid #e5e5e5;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 50px;
+}
+
+.logo{
+    font-size:32px;
+    font-weight:700;
+    color:#222;
+}
+
+.logo span{
+    font-size:14px;
+    color:#999;
+    margin-left:10px;
+}
+
+nav ul{
+    list-style:none;
+    display:flex;
+    gap:40px;
+}
+
+nav a{
+    text-decoration:none;
+    color:#444;
+    font-size:15px;
+}
+
+nav a:hover{
+    color:#d4af37;
+}
+
+/* 主体 */
+
+.container{
+    width:1400px;
+    max-width:95%;
+    margin:30px auto;
+
+    display:grid;
+    grid-template-columns: 1fr 320px;
+    gap:30px;
+}
+
+/* 左侧内容 */
+
+.content{
+
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.card{
+
+    background:#fff;
+    border-radius:12px;
+    overflow:hidden;
+
+    transition:0.3s;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+}
+
+.card-content{
+
+    padding:20px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    height:180px;
+
+}
+
+.card h3{
+
+    font-size:20px;
+
+    line-height:1.5;
+
+    margin-bottom:12px;
+
+    min-height:60px;
+
+}
+
+.card h3 a{
+
+    text-decoration:none;
+
+    color:#1a1a1a;
+
+}
+.card h3 a:hover{
+
+    color:#d4af37;
+
+}
+
+.card p{
+
+    color:#666;
+
+    line-height:1.8;
+
+    font-size:14px;
+
+    flex:1;
+
+}
+
+.date{
+
+    margin-top:auto;
+
+    padding-top:15px;
+
+    color:#999;
+
+    font-size:13px;
+
+}
+
+/* 右侧 */
+
+.sidebar{
+
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.widget{
+
+    background:#fff;
+    border-radius:12px;
+    padding:20px;
+
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+}
+
+.widget h2{
+    font-size:18px;
+    margin-bottom:15px;
+}
+
+.widget p{
+    line-height:1.8;
+    color:#666;
+}
+
+.widget ul{
+    list-style:none;
+}
+
+.widget ul li{
+    margin-bottom:12px;
+}
+
+.widget ul li a{
+    text-decoration:none;
+    color:#444;
+}
+
+.widget ul li a:hover{
+    color:#d4af37;
+}
+
+.vip-btn{
+
+    display:block;
+    width:100%;
+
+    text-align:center;
+
+    background:#d4af37;
+    color:#fff;
+
+    padding:12px;
+    border-radius:8px;
+
+    text-decoration:none;
+    margin-top:15px;
+}
+
+footer{
+
+    text-align:center;
+    padding:40px;
+    color:#888;
+}
+
+@media(max-width:1200px){
+
+.content{
+
+grid-template-columns:repeat(2,1fr);
+
+}
+
+}
+
+@media(max-width:900px){
+
+.container{
+
+grid-template-columns:1fr;
+
+}
+
+.content{
+
+grid-template-columns:1fr;
+
+}
+
+header{
+
+flex-direction:column;
+height:auto;
+padding:20px;
+
+}
+
+nav ul{
+
+margin-top:15px;
+flex-wrap:wrap;
+justify-content:center;
+
+}
+
+}
+
+
+
+
+
+
+.pagination{
+    grid-column:1/-1;
+    text-align:center;
+    margin-top:30px;
+}
+
+.pagination button{
+
+    padding:10px 16px;
+
+    margin:0 5px;
+
+    border:none;
+
+    background:#fff;
+
+    border-radius:8px;
+
+    cursor:pointer;
+
+    box-shadow:0 2px 8px rgba(0,0,0,.08);
+}
+
+.pagination button.active{
+
+    background:#d4af37;
+
+    color:#fff;
+}
+
+
+
+
+
+
+
+
+
+
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+</script>
+
+
+
+
+
+<body>
+<header>
+<!---------------------------------------------- 顶部导航栏内容 ---------------------------------------------->
+<div class="logo">
+黄金作战室
+<span>黄金分析 · 实盘交易 · EA测评</span>
+</div>
+<nav>
+<ul>
+<li><a href="index.html">首页</a></li>
+<li><a href="#">最新分析</a></li>
+<li><a href="videos.html">最新视频</a></li>
+<li><a href="free-resources.html">免费资源</a></li>
+<li><a href="#">会员服务</a></li>
+</ul>
+</nav>
+</header>
+<div class="container">
+<!-- 左侧文章区 -->
+<div class="content">
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?7"></a>
+<div class="card-content">
+<h3><a href="article1.html">发大水破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?8"></a>
+<div class="card-content">
+<h3><a href="article1.html">13跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?9"></a>
+<div class="card-content">
+<h3><a href="article1.html">13跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?11"></a>
+<div class="card-content">
+<h3><a href="article1.html">13跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?12"></a>
+<div class="card-content">
+<h3><a href="article1.html">2跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?13"></a>
+<div class="card-content">
+<h3><a href="article1.html">1金跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章1 ---------------------------------------------->
+<div class="card">
+<a href="article1.html"><img src="https://picsum.photos/600/400?1"></a>
+<div class="card-content">
+<h3><a href="article1.html">黄金跌破关键支撑，接下来怎么看？</a></h3>
+<p>从基本面与技术结构分析本轮黄金下跌逻辑，以及未来重点关注区域。</p>
+<div class="date">2026-06-23</div></div></div>
+<!---------------------------------------------- 文章2 ---------------------------------------------->
+<div class="card">
+<a href="article2.html"><img src="https://picsum.photos/600/400?2"></a>
+<div class="card-content">
+<h3><a href="article2.html">黄金实盘拆单室 第28期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+<!---------------------------------------------- 文章3 ---------------------------------------------->
+<div class="card">
+<a href="article3.html"><img src="https://picsum.photos/600/400?3"></a>
+<div class="card-content">
+<h3><a href="article3.html">黄金实盘拆单室 第28期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+<!---------------------------------------------- 文章4 ---------------------------------------------->
+<div class="card">
+<a href="article4.html"><img src="https://picsum.photos/600/400?4"></a>
+<div class="card-content">
+<h3><a href="article4.html">黄金实盘拆单室 第28期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+<!---------------------------------------------- 文章5 ---------------------------------------------->
+<div class="card">
+<a href="article5.html"><img src="https://picsum.photos/600/400?5"></a>
+<div class="card-content">
+<h3><a href="article5.html">黄金实盘拆单室 第28期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+<!---------------------------------------------- 文章6 ---------------------------------------------->
+<div class="card">
+<a href="article6.html"><img src="https://picsum.photos/600/400?6"></a>
+<div class="card-content">
+<h3><a href="article6.html">黄金实盘拆单室 第28期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+<!---------------------------------------------- 文章7 ---------------------------------------------->
+<div class="card">
+<a href="article7.html"><img src="https://picsum.photos/600/400?7"></a>
+<div class="card-content">
+<h3><a href="article7.html">黄金实盘拆单室 第30期</a></h3>
+<p>完整记录本次交易决策过程，包括进场逻辑、止损设置与复盘总结。</p>
+<div class="date">2026-06-22</div></div></div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="pagination" id="pagination"></div>
+
+
+
+
+
+
+
+</div>
+
+<!-- 右侧栏 -->
+
+<div class="sidebar">
+
+<div class="widget">
+<h2>关于我</h2>
+<p>
+周鹏<br><br>
+职业黄金交易员<br>
+专注黄金分析、实盘交易与EA测评。
+</p>
+</div>
+
+<div class="widget">
+<h2>最新文章</h2>
+<ul>
+<li><a href="#">黄金跌破关键支撑</a></li>
+<li><a href="#">黄金实盘拆单室</a></li>
+<li><a href="#">EA测评报告</a></li>
+<li><a href="#">本周行情展望</a></li>
+</ul>
+</div>
+
+<div class="widget">
+<h2>免费资源</h2>
+<p>
+供需交易法资料<br>
+交易日志模板<br>
+EA测评报告
+</p>
+</div>
+
+<div class="widget">
+<h2>会员服务</h2>
+<p>
+每日交易观点<br>
+EA资源下载<br>
+实盘复盘内容
+</p>
+<a href="#" class="vip-btn">加入会员</a>
+
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 zackxau | Gold Trading Room
+
+</footer>
+
+<script>
+
+const cards = document.querySelectorAll('.card');
+
+const cardsPerPage = 6;
+
+let currentPage = 1;
+
+function showPage(page){
+
+    currentPage = page;
+
+    cards.forEach((card,index)=>{
+
+        if(
+            index >= (page-1)*cardsPerPage &&
+            index < page*cardsPerPage
+        ){
+            card.style.display='block';
+        }else{
+            card.style.display='none';
+        }
+
+    });
+
+    createButtons();
+
+}
+
+function createButtons(){
+
+    const totalPages =
+    Math.ceil(cards.length/cardsPerPage);
+
+    const pagination =
+    document.getElementById('pagination');
+
+    pagination.innerHTML='';
+
+    for(let i=1;i<=totalPages;i++){
+
+        const btn =
+        document.createElement('button');
+
+        btn.innerText=i;
+
+        if(i===currentPage){
+
+            btn.classList.add('active');
+
+        }
+
+        btn.onclick=()=>showPage(i);
+
+        pagination.appendChild(btn);
+
+    }
+
+}
+
+showPage(1);
+
+</script>
+
+</body>
+
+</body>
+
+</html>
