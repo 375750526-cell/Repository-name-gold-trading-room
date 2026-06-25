@@ -3,7 +3,7 @@ name: github
 repo: xauusd-room/EA
 branch: main
 
-base_url: https://gold-oauth.aaa375750526.workers.dev
+base_url: https://xauusd-oauth.aaa375750526.workers.dev
 auth_endpoint: auth
 
 media_folder: "resources"
