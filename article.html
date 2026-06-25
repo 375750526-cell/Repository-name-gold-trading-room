@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>文章详情</title>
+<style>
+body{
+    max-width:900px;
+    margin:40px auto;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    line-height:1.8;
+}
+h1{
+    margin-bottom:10px;
+}
+.meta{
+    color:#888;
+    margin-bottom:20px;
+}
+img{
+    max-width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<h1 id="title">加载中...</h1>
+
+<div class="meta" id="date"></div>
+
+<img id="thumbnail" style="display:none;">
+
+<div id="content"></div>
+
+<script>
+const params =
+new URLSearchParams(location.search);
+
+const file =
+params.get("post");
+
+if(file){
+
+    fetch("posts/" + file)
+
+    .then(r=>r.text())
+
+    .then(text=>{
+
+        const title =
+        text.match(/title:\s*"(.*?)"/);
+
+        const date =
+        text.match(/date:\s*(.*)/);
+
+        const thumbnail =
+        text.match(/thumbnail:\s*(.*)/);
+
+        document.getElementById("title").innerText =
+        title ? title[1] : "";
+
+        document.getElementById("date").innerText =
+        date ? date[1] : "";
+
+        if(thumbnail){
+
+            document.getElementById("thumbnail").src =
+            thumbnail[1];
+
+            document.getElementById("thumbnail").style.display =
+            "block";
+        }
+
+        const body =
+        text.split("---").pop();
+
+        document.getElementById("content").innerText =
+        body.trim();
+
+    });
+
+}
+</script>
+
+</body>
+</html>
