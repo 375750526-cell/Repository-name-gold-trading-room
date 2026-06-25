@@ -1,22 +1,26 @@
 backend:
-  name: github
-  repo: xauusd-room/EA
-  branch: main
+name: github
+repo: xauusd-room/EA
+branch: main
 
+base_url: https://gold-oauth.aaa375750526.workers.dev
+auth_endpoint: auth
 
 media_folder: "resources"
 public_folder: "/resources"
 
 collections:
-  - name: "posts"
-    label: "文章"
-    folder: "posts"
-    create: true
-    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
 
-    fields:
-      - {label: "标题", name: "title", widget: "string"}
-      - {label: "简介", name: "description", widget: "text"}
-      - {label: "发布时间", name: "date", widget: "datetime"}
-      - {label: "封面图", name: "thumbnail", widget: "image"}
-      - {label: "正文", name: "body", widget: "markdown"}
+* name: "posts"
+  label: "文章"
+  folder: "posts"
+  create: true
+  slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+
+  fields:
+
+  * {label: "标题", name: "title", widget: "string"}
+  * {label: "简介", name: "description", widget: "text"}
+  * {label: "发布时间", name: "date", widget: "datetime"}
+  * {label: "封面图", name: "thumbnail", widget: "image"}
+  * {label: "正文", name: "body", widget: "markdown"}
