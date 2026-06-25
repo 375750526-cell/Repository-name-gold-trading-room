@@ -1,9 +1,23 @@
 [
   {
-    "title":"测试文章",
-    "description":"测试简介",
-    "date":"2026-06-24",
-    "thumbnail":"/resources/人物_00147_.png",
-    "url":"article1.html"
+    "title": "黄金暴跌",
+    "description": "到底是什么原因",
+    "date": "2026-06-25",
+    "thumbnail": "/resources/人物_00200_.png",
+    "url": "article.html?post=2026-06-25-黄金暴跌.md"
+  },
+  {
+    "title": "afdshhfadhadsfhdfahhlj ",
+    "description": "dfasdfadfasfdasdfasdfdafsdafsdfas",
+    "date": "2026-06-24",
+    "thumbnail": "/resources/人物_00147_.png",
+    "url": "article.html?post=2026-06-24-afdshhfadhadsfhdfahhlj.md"
+  },
+  {
+    "title": "测试文章",
+    "description": "",
+    "date": "2026-06-24",
+    "thumbnail": "",
+    "url": "article.html?post=test.md"
   }
 ]
