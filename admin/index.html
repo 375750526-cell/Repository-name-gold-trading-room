@@ -1,13 +1,59 @@
 <!DOCTYPE html>
-
 <html>
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Content Manager</title>
+
+<meta charset="UTF-8">
+
+<title>XAUUSD Room 后台</title>
+
+<link rel="stylesheet" href="style.css">
+
 </head>
 
+
 <body>
-<script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
+
+
+<div class="box">
+
+<h1>XAUUSD Room 后台</h1>
+
+
+<button id="login">
+GitHub 登录
+</button>
+
+
+<div id="editor" style="display:none">
+
+
+<h3>发布文章</h3>
+
+
+<input id="title"
+placeholder="文章标题">
+
+
+<textarea id="content"
+placeholder="文章内容"></textarea>
+
+
+<button id="publish">
+发布文章
+</button>
+
+
+</div>
+
+
+<p id="status"></p>
+
+
+</div>
+
+
+<script src="admin.js"></script>
+
 </body>
+
 </html>
