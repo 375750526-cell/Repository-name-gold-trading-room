@@ -1,8 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN">
+
 <head>
 
 <meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
 
 <title>XAUUSD Room 后台</title>
 
@@ -16,6 +19,7 @@
 
 <div class="box">
 
+
 <h1>XAUUSD Room 后台</h1>
 
 
@@ -24,18 +28,53 @@ GitHub 登录
 </button>
 
 
+
 <div id="editor" style="display:none">
 
 
-<h3>发布文章</h3>
+<h2>发布文章</h2>
 
 
-<input id="title"
-placeholder="文章标题">
+
+<label>文章标题</label>
+
+<input
+id="title"
+placeholder="请输入文章标题">
 
 
-<textarea id="content"
-placeholder="文章内容"></textarea>
+
+<label>文章简介</label>
+
+<textarea
+id="description"
+placeholder="请输入文章简介"></textarea>
+
+
+
+<label>发布时间</label>
+
+<input
+id="date"
+type="date">
+
+
+
+<label>封面图片</label>
+
+<input
+id="image"
+type="file"
+accept="image/*">
+
+
+
+<label>文章正文</label>
+
+<textarea
+id="content"
+placeholder="请输入正文内容"></textarea>
+
 
 
 <button id="publish">
@@ -46,13 +85,16 @@ placeholder="文章内容"></textarea>
 </div>
 
 
-<p id="status"></p>
+
+<div id="status"></div>
 
 
 </div>
 
 
+
 <script src="admin.js"></script>
+
 
 </body>
 
