@@ -1,31 +1,88 @@
 body{
-font-family:Arial;
-background:#f5f5f5;
+font-family:Arial,"Microsoft YaHei";
+background:#f2f3f5;
 }
 
 
 .box{
-width:600px;
-margin:80px auto;
-background:white;
+
+width:700px;
+
+margin:50px auto;
+
+background:#fff;
+
 padding:30px;
-border-radius:10px;
+
+border-radius:12px;
+
 }
 
 
-input,textarea{
+
+h1{
+
+text-align:center;
+
+}
+
+
+
+label{
+
+display:block;
+
+margin-top:15px;
+
+font-weight:bold;
+
+}
+
+
+
+input,
+textarea{
+
 width:100%;
-margin:10px 0;
-padding:10px;
+
+box-sizing:border-box;
+
+margin-top:8px;
+
+padding:12px;
+
+font-size:15px;
+
 }
+
 
 
 textarea{
-height:300px;
+
+height:180px;
+
+resize:vertical;
+
 }
 
 
+
 button{
-padding:12px 20px;
+
+margin-top:20px;
+
+padding:12px 25px;
+
+border:none;
+
 cursor:pointer;
+
+}
+
+
+
+#status{
+
+margin-top:20px;
+
 }
