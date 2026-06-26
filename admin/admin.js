@@ -5,8 +5,10 @@ const WORKER_URL =
 const loginBtn =
 document.getElementById("login");
 
+
 const editor =
 document.getElementById("editor");
+
 
 const status =
 document.getElementById("status");
@@ -47,6 +49,7 @@ status.innerHTML =
 
 
 
+
 // 发布文章
 
 document
@@ -70,14 +73,20 @@ const content =
 document.getElementById("content").value;
 
 
-const image =
-document.getElementById("image").files[0];
+
+if(!title){
+
+alert("请输入文章标题");
+
+return;
+
+}
 
 
 
-if(!title || !content){
+if(!content){
 
-alert("标题和正文不能为空");
+alert("请输入文章正文");
 
 return;
 
@@ -119,36 +128,47 @@ content
 
 
 
-if(image){
 
-form.append(
-"image",
-image
-);
-
-}
-
+try{
 
 
 const res =
 await fetch(
-WORKER_URL+"/publish",
+WORKER_URL + "/publish",
 {
+
 method:"POST",
-body:form
+
+body:form,
+
+credentials:"include"
+
 }
+
 );
 
 
 
-const result =
+const text =
 await res.text();
 
 
 
 status.innerHTML =
-result;
+text;
 
+
+
+}
+
+catch(err){
+
+
+status.innerHTML =
+"发布失败："+err.message;
+
+
+}
 
 
 };
