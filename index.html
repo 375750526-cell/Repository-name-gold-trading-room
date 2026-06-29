@@ -163,11 +163,57 @@ nav ul li:last-child a:hover {
 }
 
 @media(max-width:1200px){.content{grid-template-columns:repeat(2,1fr); }} 
-@media(max-width:900px)
-    {.container{grid-template-columns:1fr; }.content{grid-template-columns:1fr;}
-        header{flex-direction:column;height:auto;padding:20px;}
-        nav ul{margin-top:15px;flex-wrap:wrap;justify-content:center;}
+/* ===================== 📱 手机端适配专属优化 ===================== */
+@media(max-width: 900px) { 
+    
+    /* 1. 强行解除电脑端 90px 的高度限制，让手机导航栏根据内容自动伸展高度 */
+    header {
+        height: auto !important;
+        padding: 20px 15px !important;
     }
+
+    /* 2. 让包裹盒子在手机上变成上下垂直排列，不再横向撑开 */
+    .header-container {
+        flex-direction: column !important;
+        gap: 15px !important;
+        padding: 0 15px !important;
+    }
+
+    /* 3. 让 Logo 在手机屏幕上居中显示 */
+    .logo {
+        justify-content: center !important;
+        margin-bottom: 5px;
+    }
+
+    /* 4. 🚀 最核心的修改：让 5 个菜单菜单在手机上变成横向一排、居中自动换行，不再贴在最右边 */
+    nav ul {
+        display: flex !important;
+        flex-direction: row !important; /* 确保是横向一排 */
+        flex-wrap: wrap !important;     /* 屏幕装不下时自动换到下一行 */
+        justify-content: center !important; /* 整体居中显示 */
+        gap: 15px 20px !important;       /* 缩小字与字之间的间距 */
+        margin-top: 5px !important;
+    }
+
+    /* 5. 🛠️ 拯救那个变成垂直椭圆的会员服务按钮 */
+    nav ul li:last-child a {
+        display: inline-block !important;
+        padding: 6px 16px !important;    /* 缩小手机上按钮的厚度 */
+        border-radius: 20px !important;
+        white-space: nowrap !important;  /* 🚀 关键：强行让“会员服务”四个字横向排列，绝不准换行竖排 */
+    }
+
+    /* 6. 主体卡片容器在手机上全部变为 1 列顶满 */
+    .container {
+        width: 100% !important;
+        padding: 10px !important;
+    }
+    
+    .content {
+        grid-template-columns: 1fr !important;
+    }
+}
+
 
 .content-intro-text {
     text-align: center; 
