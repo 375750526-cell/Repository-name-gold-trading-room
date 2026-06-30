@@ -6,6 +6,7 @@
 <title>LOZENO™ - 金融科技量化 EA</title>
 <style>*{margin:0;padding:0;box-sizing:border-box;}
 /* ===================== 全局与头部 (Header) ===================== */
+/* ===================== 全局与头部 (Header) ===================== */
 body {
     background-color: #050505; /* 确保深色系网页不会出现白屏 */
     color: #ffffff;
@@ -36,27 +37,25 @@ header {
 }
 
 .logo {
-    font-size: 28px;        
+    font-size: 28px;        /* 略微缩小主标题字号，让上下排版更精致 */
     font-weight: 800;
     color: #ffffff;
     letter-spacing: 1px;
     display: flex;
-    flex-direction: column; /* 保持纵向排列 */
-    align-items: center;    /* 💡 核心：让子元素（大字和小字）整体在容器中居中对齐 */
+    flex-direction: column; /* 💡 核心：把横向排列改为纵向（上下结构） */
+    align-items: center;    /* 💡 核心：让子元素大字和小字整体居中对齐 */
     text-align: center;     /* 💡 核心：确保文字内容本身也是居中的 */
-    line-height: 1.1;       
+    line-height: 1.1;
 }
 
 .logo span {
-    font-size: 10px;        
+    font-size: 11px;
     color: #717681;
-    margin-left: 0;         
-    margin-top: 2px;        /* 控制小字和上面大字的距离 */
-    letter-spacing: 3px;  
-    text-align: center;     /* 💡 核心：确保小字文本自身居中 */
+    margin-left: 0;
+    margin-top: 4px;        /* 控制小字和上面大字的距离 */
+    letter-spacing: 1.5px;
+    text-align: center;
 }
-
-
 
 nav ul {
     list-style: none;
@@ -90,22 +89,29 @@ nav ul li:last-child a {
 
 nav ul li:last-child a:hover {
     background: #e0a927;
-    color: #000000; /* 确保悬停时文字依然保持黑色可见 */
+    color: #000000;
     transform: translateY(-1px);
 }
 
-/* ===================== 巨幕介绍区 (Hero Banner) ===================== */
+/* ===================== 💡 重新调校的 100% 铺满首屏 Hero 样式 ===================== */
 .content-intro-text {
     position: relative;
     width: 100%;
-    min-height: 70vh;
+
+    /* 💡 核心：锁死高度为 100vh 减去头部导航栏的 90px。确保大背景图完美占满第一屏 */
+    height: calc(100vh - 90px);
+    min-height: 700px; /* 提高硬性防护底线，确保任何屏幕尺寸都有足够的高空间展示所有内容 */
+
+    /* 💡 核心优化：高规格自适应背景图调校 */
     background-image: url('intro-bg.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover;        /* 完美缩放：背景图全自动等比例切割，100%铺满容器 */
+    background-position: center;   /* 完美对齐：背景图的核心视觉点永远死死锁定在屏幕正中央 */
+    background-repeat: no-repeat;  /* 防止重复平铺 */
+    background-attachment: scroll; /* 确保在移动端滚动时背景图不会产生异常形变 */
     overflow: hidden;
-    padding: 140px 20px 100px;
+
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     box-sizing: border-box;
@@ -116,7 +122,7 @@ nav ul li:last-child a:hover {
     inset: 0;
     background: radial-gradient(
         circle,
-        rgba(5,5,5,0.75) 0%,
+        rgba(5,5,5,0.70) 0%,
         rgba(5,5,5,0.98) 100%
     );
     z-index: 1;
@@ -126,11 +132,24 @@ nav ul li:last-child a:hover {
     position: relative;
     z-index: 2;
     text-align: center;
-    max-width: 1000px;
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+
+    /* 💡 核心空间解耦：通过 padding 控制上下安全区域 */
+    padding: 0 0 40px 0; /* 底部预留40px呼吸边距 */
     display: flex;
     flex-direction: column;
-    align-items: center; /* 确保内容整体居中 */
-    gap: 20px; /* 统一控制间距 */
+    box-sizing: border-box;
+}
+
+/* 💡 新增：通过智能推顶技术，把上方所有文字和联系方式垂直向下平滑推送，同时确保底部4个大卡片死死卡在最底端不乱动 */
+.intro-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin-top: auto; /* ⚡ 黄金魔法属性：把上方内容往下推到黄金视觉点 */
 }
 
 .content-intro-text h2 {
@@ -143,21 +162,22 @@ nav ul li:last-child a:hover {
     line-height: 1.1;
 }
 
-.content-intro-text .intro-content > p {
+/* 副标题微调 */
+.hero-subtitle {
     color: #ffffff;
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 500;
     line-height: 1.6;
     max-width: 800px;
-    margin: 0 auto; /* 移除破坏间距的 top:20px，交由 gap 统一控制 */
+    margin: 0 auto;
     text-shadow: 0 1px 5px rgba(0,0,0,0.8);
     opacity: 0.85;
 }
 
 .time-highlight {
     color: #ffd043;
-    font-weight: 800;      
-    letter-spacing: 2px; 
+    font-weight: 800;
+    letter-spacing: 2px;
 }
 
 /* 呼吁行动按钮 */
@@ -179,63 +199,118 @@ nav ul li:last-child a:hover {
     background: #e0a927;
 }
 
+/* ===================== 💡 夹在中间的轻量级联系区样式 ===================== */
+.lz-contact-section-inline {
+    width: 100%;
+    margin-top: 35px;     /* 控制联系胶囊和上方按钮的距离 */
+    margin-bottom: auto;  /* ⚡ 黄金魔法属性：确保和底部四大优势中间产生弹性呼吸空隙，让整体结构绝不上浮 */
+    display: flex;
+    justify-content: center;
+}
+
+.contact-methods-inline {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.contact-tag-inline {
+    background: rgba(15, 17, 21, 0.85);
+    border: 1px solid rgba(255, 208, 67, 0.2); /* 微弱黑金发光边框 */
+    padding: 12px 28px;
+    border-radius: 50px;
+    font-size: 15px;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    transition: 0.3s;
+}
+
+.contact-tag-inline:hover {
+    border-color: #ffd043;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 35px rgba(255, 208, 67, 0.1);
+}
+
+.card-icon-inline {
+    font-size: 18px;
+}
+
+.lz-highlight-inline {
+    color: #ffd043;
+    font-weight: 800;
+}
+
 /* ===================== 统计数据区 (Stats) ===================== */
 .intro-stats {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 140px;
-    margin-top: 60px;
+    gap: 120px; /* 完美承载在1200宽内 */
     width: 100%;
+    margin-top: 40px; /* 给卡片上方留出固定间距 */
+    margin-bottom: 0;
 }
 
 .stat-item {
     display: flex;
     flex-direction: column;
-    align-items: center;           
+    align-items: center;
     text-align: center;
 }
 
 .stat-item h3 {
-    color: #ffd043; 
-    font-size: 36px; 
-    font-weight: 800; 
-    margin: 0 0 12px 0; 
-    letter-spacing: -0.5px;         
+    color: #ffd043;
+    font-size: 36px;
+    font-weight: 800;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
     font-family: 'SF Pro Display', '-apple-system', 'Roboto', sans-serif;
 }
 
 .stat-item p {
-    color: #565b66; 
-    font-size: 11px; 
-    font-weight: 700;     
-    letter-spacing: 3px; 
-    text-shadow: none;   
+    color: #565b66;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-shadow: none;
     margin: 0;
 }
 
-/* ===================== 仪表盘区 (Dashboard) ===================== */
-.lz-dashboard-wrapper {
+/* ===================== 💡 移出来的独立仪表盘大盒子样式 ===================== */
+.independent-dashboard-section {
     width: 100%;
-    display: flex; 
+    background: #050505;
+    padding: 100px 20px 60px 20px; /* 给予它极为宽敞的上下滚动呼吸空间 */
+    display: flex;
     justify-content: center;
     align-items: center;
-    margin: 60px 0 80px 0; 
     box-sizing: border-box;
-    background: transparent; 
-    border: none;            
+}
+
+.lz-dashboard-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    background: transparent;
+    border: none;
     box-shadow: none;
 }
 
 .lz-db-dashboard {
-    width: 480px;   
-    background: rgba(15, 15, 15, 0.85); 
-    border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 16px; 
+    width: 480px;
+    background: rgba(15, 15, 15, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
     padding: 24px;
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6); 
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
     box-sizing: border-box;
 }
 
@@ -243,7 +318,7 @@ nav ul li:last-child a:hover {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.06); 
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
     padding-bottom: 14px;
     margin-bottom: 20px;
 }
@@ -251,18 +326,18 @@ nav ul li:last-child a:hover {
 .lz-db-status {
     font-size: 14px;
     font-weight: 600;
-    color: #8a9bb4;             
+    color: #8a9bb4;
     display: flex;
     align-items: center;
-    gap: 10px;                  
+    gap: 10px;
 }
 
 .lz-db-dot {
     width: 8px;
     height: 8px;
-    background-color: #00ff66;   
+    background-color: #00ff66;
     border-radius: 50%;
-    animation: lz-status-pulse 2s infinite ease-in-out; 
+    animation: lz-status-pulse 2s infinite ease-in-out;
 }
 
 @keyframes lz-status-pulse {
@@ -273,7 +348,7 @@ nav ul li:last-child a:hover {
 
 .lz-db-tag {
     font-size: 11px;
-    background: rgba(0, 255, 102, 0.06); 
+    background: rgba(0, 255, 102, 0.06);
     border: 1px solid rgba(0, 255, 102, 0.15);
     padding: 4px 10px;
     border-radius: 4px;
@@ -284,24 +359,24 @@ nav ul li:last-child a:hover {
 .lz-db-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 16px;                  
+    gap: 16px;
     margin-bottom: 24px;
 }
 
 .lz-db-card {
-    background: rgba(255, 255, 255, 0.02); 
+    background: rgba(255, 255, 255, 0.02);
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 8px;
     padding: 16px;
     display: flex;
     flex-direction: column;
-    gap: 8px;                   
-    text-align: left; 
+    gap: 8px;
+    text-align: left;
 }
 
 .lz-db-label {
     font-size: 12px;
-    color: #565b66;             
+    color: #565b66;
     font-weight: 500;
     line-height: 1.2;
 }
@@ -309,13 +384,13 @@ nav ul li:last-child a:hover {
 .lz-db-value {
     font-size: 24px;
     font-weight: 700;
-    color: #ffffff;             
+    color: #ffffff;
     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
     line-height: 1;
 }
 
-.lz-db-gold { color: #ffd043; }  
-.lz-db-green { color: #00ff66; } 
+.lz-db-gold { color: #ffd043; }
+.lz-db-green { color: #00ff66; }
 
 .lz-db-chart-box {
     background: rgba(0, 0, 0, 0.15);
@@ -340,10 +415,10 @@ nav ul li:last-child a:hover {
 }
 
 .lz-db-svg path {
-    stroke: #ffd043;            
-    stroke-width: 2.5;          
-    fill: none;                 
-    stroke-linecap: round;      
+    stroke: #ffd043;
+    stroke-width: 2.5;
+    fill: none;
+    stroke-linecap: round;
     filter: drop-shadow(0px 2px 8px rgba(255, 208, 67, 0.4));
 }
 
@@ -416,93 +491,13 @@ nav ul li:last-child a:hover {
 
 .date {
     margin-top: auto;
-    padding-top: 15px;
-    color: #999;
-    font-size: 13px;
-}
 
-/* ===================== 底部横幅与页脚 (Footer Banner) ===================== */
-.content-footer-text {
-    text-align: center;
-    margin: 50px auto 40px;
-    width: calc(100% - 40px); /* 留出两边间距 */
-    max-width: 1400px;
-    background-image: url('footer-bg.png'); 
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    padding: 80px 40px; /* 修复：从巨大的 600px 减小至合理的 80px 确保样式平衡 */
-    min-height: 250px;  /* 保证背景图展示的同时不会把页面撑开上千像素 */
-    border-radius: 12px; 
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-}
 
-.content-footer-text h3 {
-    color: #ffd043; 
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 12px 0;
-}
-
-.content-footer-text p {
-    color: #e5e5e5;
-    font-size: 14px;
-    font-weight: 500;
-    line-height: 1.6;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-footer {
-    text-align: center;
-    padding: 40px;
-    color: #888;
-}
-
-/* 全局分割线 */
-.lz-global-divider {
-    width: 100%;  
-    border: none; 
-    height: 1px;    
-    background: linear-gradient(to right, rgba(5,5,5,0) 0%, rgba(255, 208, 67, 0.3) 50%, rgba(5,5,5,0) 100%);
-    margin: 30px 0; 
-    box-sizing: border-box;
-}
-
-/* ===================== 完美的响应式媒体查询断点 ===================== */
-@media (max-width: 1200px) {
-    .content {
-        grid-template-columns: repeat(3, 1fr); /* 1200px 优雅地变为 3 列而不会由于太宽变形 */
-    }
-}
-
-@media (max-width: 950px) {
-    .content {
-        grid-template-columns: repeat(2, 1fr); /* 950px 变为 2 列 */
-    }
-    .intro-stats {
-        gap: 60px; /* 缩小数字统计间距 */
-    }
-    .content-intro-text h2 {
-        font-size: 52px; /* 缩减 Banner 标题大小防超屏 */
-    }
-}
-
-@media (max-width: 768px) {
-    .intro-stats {
-        flex-direction: column; /* 手机端统计变为上下排布防止内容横向溢出 */
-        gap: 30px;
-        margin-top: 40px;
-    }
 
 </style>
 </head>
 <body>
-<header> 
+<header>
     <div class="header-container">
         <div class="logo">
             LOZENO.EA
@@ -526,108 +521,108 @@ footer {
 
 
 <!-- ⬇️ 【完整内容】居中文案组件：横跨3列，不破坏大框架 ⬇️ -->
+<!-- ==================== 2️⃣ 专属 100% 全屏 Hero 大盒子 ==================== -->
+<!-- 💡 它的唯一使命：完美吞没第一屏，展示你指定的 5 样东西，绝对不让仪表盘挤上来 -->
 <div class="content-intro-text">
 
-    <div class="intro-overlay"></div>
+    <div class="intro-overlay"></div> <!-- 暗化遮罩 -->
 
     <div class="intro-content">
 
-        <!-- HERO 区 -->
+        <!-- ① 主标题与副标题 -->
         <div class="intro-hero">
             <h2>运用LOZENO策略进行交易</h2>
+            <p class="hero-subtitle">让自动化 EA 成为您的智能交易与财富增值引擎</p>
 
-            <!-- 优化：为了让 CSS 完美抓取，保持其在 intro-hero 内的纯净 -->
-            <p>
-                让自动化 EA 成为你的 
-                <span class="time-highlight">24/7</span> 
-                财富增值引擎
-            </p>
-
+            <!-- ② 呼吁行动按钮 -->
             <div class="cta-box">
                 <button class="lozeno-cta-btn">免费获取 ✦</button>
             </div>
         </div>
 
-        <!-- STATS 区 -->
+        <!-- ③ 联系方式胶囊区（完美融合在首屏中） -->
+        <div class="lz-contact-section-inline">
+            <div class="contact-methods-inline">
+                <div class="contact-tag-inline">
+                    <span class="card-icon-inline">💬</span>
+                    官方微信 / 企微: <strong class="lz-highlight-inline">LOZENO_EA</strong>
+                </div>
+                <div class="contact-tag-inline">
+                    <span class="card-icon-inline">✈️</span>
+                    Telegram 频道: <strong class="lz-highlight-inline">@LOZENO_EA</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- ④ 4大核心优势数字 -->
         <div class="intro-stats">
             <div class="stat-item">
                 <h3>$150K</h3>
                 <p>MAX ACCOUNT</p>
             </div>
-
             <div class="stat-item">
                 <h3>90%</h3>
                 <p>PROFIT SPLIT</p>
             </div>
-
             <div class="stat-item">
                 <h3>7 Days</h3>
                 <p>MIN TO PAYOUT</p>
             </div>
-
             <div class="stat-item">
                 <h3>TOP</h3>
                 <p>SUPPORT</p>
             </div>
         </div>
 
-        <!-- DASHBOARD 区 -->
-        <div class="lz-dashboard-wrapper">
+    </div>
+</div>
 
-            <div class="lz-db-dashboard">
 
-                <div class="lz-db-header">
-                    <div class="lz-db-status">
-                        <span class="lz-db-dot"></span>
-                        LOZENO EA v4.2 实盘监控中
-                    </div>
-                    <div class="lz-db-tag">AI 神经网络算法</div>
+<!-- ==================== 3️⃣ 💡 全新独立的一级盒子：实盘监控仪表盘 ==================== -->
+<!-- 💡 把它彻底从首屏中解放出来！只有向下滑动，它才会作为一个惊艳的重磅板块赫然出现 -->
+<div class="independent-dashboard-section">
+    <div class="lz-dashboard-wrapper">
+        <div class="lz-db-dashboard">
+            <div class="lz-db-header">
+                <div class="lz-db-status">
+                    <span class="lz-db-dot"></span>
+                    LOZENO EA v4.2 实盘监控中
                 </div>
-
-                <div class="lz-db-grid">
-
-                    <!-- 修复：将内部的 p 和 h3 全部换成 div，防止被外部的通用样式乱插脚，确保字号和颜色完全听从各自 class 的指挥 -->
-                    <div class="lz-db-card">
-                        <div class="lz-db-label">历史风控胜率 (Win Rate)</div>
-                        <div class="lz-db-value lz-db-gold">78.4%</div>
-                    </div>
-
-                    <div class="lz-db-card">
-                        <div class="lz-db-label">最大历史回撤 (Max DD)</div>
-                        <div class="lz-db-value lz-db-green">&lt; 4.82%</div>
-                    </div>
-
-                    <div class="lz-db-card">
-                        <div class="lz-db-label">当前运行总天数</div>
-                        <div class="lz-db-value">1,240 天</div>
-                    </div>
-
-                    <div class="lz-db-card">
-                        <div class="lz-db-label">总平仓获利交易</div>
-                        <div class="lz-db-value">14,892 笔</div>
-                    </div>
-
-                </div>
-
-                <div class="lz-db-chart-box">
-
-                    <div class="lz-db-chart-header">
-                        <span class="lz-db-chart-title">净值增长曲线 (Equity Curve)</span>
-                        <span class="lz-db-chart-percent">+342.8%</span>
-                    </div>
-
-                    <!-- 这里的 viewBox="0 0 400 60" 配合得非常好，SVG 折线会完美顺滑地舒展 -->
-                    <svg class="lz-db-svg" viewBox="0 0 400 60">
-                        <path d="M 10 50 Q 100 45 200 30 T 390 10" />
-                    </svg>
-
-                </div>
-
+                <div class="lz-db-tag">AI 神经网络算法</div>
             </div>
-
+            <div class="lz-db-grid">
+                <div class="lz-db-card">
+                    <div class="lz-db-label">历史风控胜率 (Win Rate)</div>
+                    <div class="lz-db-value lz-db-gold">78.4%</div>
+                </div>
+                <div class="lz-db-card">
+                    <div class="lz-db-label">最大历史回撤 (Max DD)</div>
+                    <div class="lz-db-value lz-db-green">&lt; 4.82%</div>
+                </div>
+                <div class="lz-db-card">
+                    <div class="lz-db-label">当前运行总天数</div>
+                    <div class="lz-db-value">1,240 天</div>
+                </div>
+                <div class="lz-db-card">
+                    <div class="lz-db-label">总平仓获利交易</div>
+                    <div class="lz-db-value">14,892 笔</div>
+                </div>
+            </div>
+            <div class="lz-db-chart-box">
+                <div class="lz-db-chart-header">
+                    <span class="lz-db-chart-title">净值增长曲线 (Equity Curve)</span>
+                    <span class="lz-db-chart-percent">+342.8%</span>
+                </div>
+                <svg class="lz-db-svg" viewBox="0 0 400 60">
+                    <path d="M 10 50 Q 100 45 200 30 T 390 10" />
+                </svg>
+            </div>
         </div>
+    </div>
+</div>
 
-        <hr class="lz-global-divider">
+<hr class="lz-global-divider">
+
 
     </div>
 </div>
@@ -640,7 +635,7 @@ footer {
     <div class="content-footer-text">
         <h3>© XAUUSD.EA 技术支持与风险提示</h3>
         <p>这里可以填写你网站的版权声明、风险提示、免责细则，或者任何你想对读者说的话。它会自动在 4 个卡片的正下方完美居中并横向铺满展示。</p>
-    </div>    
+    </div>
 </div>
 
 
@@ -697,7 +692,7 @@ fetch('articles.json')
         container.innerHTML += `
         <div class="card">
             <a href="${article.url}">
-                <img src="${article.thumbnail}">
+                <img src="${article.thumbnail}" alt="图片描述">
             </a>
             <div class="card-content">
                 <h3>
