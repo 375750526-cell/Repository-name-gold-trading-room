@@ -2,709 +2,686 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LOZENO™ - 金融科技量化 EA</title>
-    <style>* {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
+    <!-- 💡 核心学习点 1：移动端自适应视口安全锁。这行代码是让你的网页在手机端不缩放、不变形的前提！ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>LOZENO™ - 官方量化门户</title>
 
-    /* ===================== 全局与头部 (Header) ===================== */
-    /* ===================== 全局与头部 (Header) ===================== */
-    body {
-        background-color: #050505; /* 确保深色系网页不会出现白屏 */
-        color: #ffffff;
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    }
-
-    header {
-        height: 90px;
-        background: #0b0c0e;
-        border-bottom: 1px solid #1c1e22;
-        width: 100%;
-        position: sticky;
-        top: 0;
-        z-index: 9999;
-    }
-
-    .header-container {
-        max-width: 1400px;
-        width: 100%;
-        height: 100%;
-        margin: 0 auto;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 40px;
-        box-sizing: border-box;
-    }
-
-    .logo {
-        font-size: 28px; /* 略微缩小主标题字号，让上下排版更精致 */
-        font-weight: 800;
-        color: #ffffff;
-        letter-spacing: 1px;
-        display: flex;
-        flex-direction: column; /* 💡 核心：把横向排列改为纵向（上下结构） */
-        align-items: center; /* 💡 核心：让子元素大字和小字整体居中对齐 */
-        text-align: center; /* 💡 核心：确保文字内容本身也是居中的 */
-        line-height: 1.1;
-    }
-
-    .logo span {
-        font-size: 11px;
-        color: #717681;
-        margin-left: 0;
-        margin-top: 4px; /* 控制小字和上面大字的距离 */
-        letter-spacing: 1.5px;
-        text-align: center;
-    }
-
-    nav ul {
-        list-style: none;
-        display: flex;
-        gap: 40px;
-        align-items: center;
-        margin: 0;
-        padding: 0;
-    }
-
-    nav a {
-        text-decoration: none;
-        color: #717681;
-        font-size: 14px;
-        font-weight: 600;
-        transition: 0.2s;
-    }
-
-    nav a:hover {
-        color: #ffd043;
-    }
-
-    nav ul li:last-child a {
-        background: #ffd043;
-        color: #000000;
-        padding: 8px 22px;
-        border-radius: 30px;
-        font-weight: 700;
-        transition: 0.2s;
-    }
-
-    nav ul li:last-child a:hover {
-        background: #e0a927;
-        color: #000000;
-        transform: translateY(-1px);
-    }
-
-    /* ===================== 💡 重新调校的 100% 铺满首屏 Hero 样式 ===================== */
-    .content-intro-text {
-        position: relative;
-        width: 100%;
-
-        /* 💡 核心：锁死高度为 100vh 减去头部导航栏的 90px。确保大背景图完美占满第一屏 */
-        height: calc(100vh - 90px);
-        min-height: 700px; /* 提高硬性防护底线，确保任何屏幕尺寸都有足够的高空间展示所有内容 */
-
-        /* 💡 核心优化：高规格自适应背景图调校 */
-        background-image: url('intro-bg.png');
-        background-size: cover; /* 完美缩放：背景图全自动等比例切割，100%铺满容器 */
-        background-position: center; /* 完美对齐：背景图的核心视觉点永远死死锁定在屏幕正中央 */
-        background-repeat: no-repeat; /* 防止重复平铺 */
-        background-attachment: scroll; /* 确保在移动端滚动时背景图不会产生异常形变 */
-        overflow: hidden;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-sizing: border-box;
-    }
-
-    .intro-overlay {
-        position: absolute;
-        inset: 0;
-        background: radial-gradient(
-                circle,
-                rgba(5, 5, 5, 0.70) 0%,
-                rgba(5, 5, 5, 0.98) 100%
-        );
-        z-index: 1;
-    }
-
-    .intro-content {
-        position: relative;
-        z-index: 2;
-        text-align: center;
-        max-width: 1200px;
-        width: 100%;
-        height: 100%;
-
-        /* 💡 核心空间解耦：通过 padding 控制上下安全区域 */
-        padding: 0 0 40px 0; /* 底部预留40px呼吸边距 */
-        display: flex;
-        flex-direction: column;
-        box-sizing: border-box;
-    }
-
-    /* 💡 新增：通过智能推顶技术，把上方所有文字和联系方式垂直向下平滑推送，同时确保底部4个大卡片死死卡在最底端不乱动 */
-    .intro-hero {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 15px;
-        margin-top: auto; /* ⚡ 黄金魔法属性：把上方内容往下推到黄金视觉点 */
-    }
-
-    .content-intro-text h2 {
-        color: #ffd043;
-        font-size: 72px;
-        font-weight: 800;
-        margin: 0;
-        letter-spacing: 0.5px;
-        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
-        line-height: 1.1;
-    }
-
-    /* 副标题微调 */
-    .hero-subtitle {
-        color: #ffffff;
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1.6;
-        max-width: 800px;
-        margin: 0 auto;
-        text-shadow: 0 1px 5px rgba(0, 0, 0, 0.8);
-        opacity: 0.85;
-    }
-
-    .time-highlight {
-        color: #ffd043;
-        font-weight: 800;
-        letter-spacing: 2px;
-    }
-
-    /* 呼吁行动按钮 */
-    .lozeno-cta-btn {
-        margin-top: 10px;
-        background: #00cc52;
-        color: #000;
-        border: none;
-        padding: 14px 40px;
-        border-radius: 16px;
-        font-size: 18px;
-        font-weight: 800;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-
-    .lozeno-cta-btn:hover {
-        transform: scale(1.03);
-        background: #e0a927;
-    }
-
-    /* ===================== 💡 夹在中间的轻量级联系区样式 ===================== */
-    .lz-contact-section-inline {
-        width: 100%;
-        margin-top: 35px; /* 控制联系胶囊和上方按钮的距离 */
-        margin-bottom: auto; /* ⚡ 黄金魔法属性：确保和底部四大优势中间产生弹性呼吸空隙，让整体结构绝不上浮 */
-        display: flex;
-        justify-content: center;
-    }
-
-    .contact-methods-inline {
-        display: flex;
-        justify-content: center;
-        gap: 24px;
-        flex-wrap: wrap;
-    }
-
-    .contact-tag-inline {
-        background: rgba(15, 17, 21, 0.85);
-        border: 1px solid rgba(255, 208, 67, 0.2); /* 微弱黑金发光边框 */
-        padding: 12px 28px;
-        border-radius: 50px;
-        font-size: 15px;
-        color: #ffffff;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        transition: 0.3s;
-    }
-
-    .contact-tag-inline:hover {
-        border-color: #ffd043;
-        transform: translateY(-2px);
-        box-shadow: 0 12px 35px rgba(255, 208, 67, 0.1);
-    }
-
-    .card-icon-inline {
-        font-size: 18px;
-    }
-
-    .lz-highlight-inline {
-        color: #ffd043;
-        font-weight: 800;
-    }
-
-    /* ===================== 统计数据区 (Stats) ===================== */
-    .intro-stats {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        gap: 120px; /* 完美承载在1200宽内 */
-        width: 100%;
-        margin-top: 40px; /* 给卡片上方留出固定间距 */
-        margin-bottom: 0;
-    }
-
-    .stat-item {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-    }
-
-    .stat-item h3 {
-        color: #ffd043;
-        font-size: 36px;
-        font-weight: 800;
-        margin: 0 0 12px 0;
-        letter-spacing: -0.5px;
-        font-family: 'SF Pro Display', '-apple-system', 'Roboto', sans-serif;
-    }
-
-    .stat-item p {
-        color: #565b66;
-        font-size: 11px;
-        font-weight: 700;
-        letter-spacing: 3px;
-        text-shadow: none;
-        margin-bottom: 30px;
-    }
-
-    /* ===================== 💡 移出来的独立仪表盘大盒子样式 ===================== */
-    .independent-dashboard-section {
-        width: 100%;
-        background: #050505;
-        padding: 100px 20px 60px 20px; /* 给予它极为宽敞的上下滚动呼吸空间 */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-    }
-
-    .lz-dashboard-wrapper {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        box-sizing: border-box;
-        background: transparent;
-        border: none;
-        box-shadow: none;
-    }
-
-    .lz-db-dashboard {
-        width: 480px;
-        background: rgba(15, 15, 15, 0.85);
-        border: 1px solid rgba(255, 255, 255, 0.08);
-        border-radius: 16px;
-        padding: 24px;
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-        box-sizing: border-box;
-    }
-
-    .lz-db-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-        padding-bottom: 14px;
-        margin-bottom: 20px;
-    }
-
-    .lz-db-status {
-        font-size: 14px;
-        font-weight: 600;
-        color: #8a9bb4;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    .lz-db-dot {
-        width: 8px;
-        height: 8px;
-        background-color: #00ff66;
-        border-radius: 50%;
-        animation: lz-status-pulse 2s infinite ease-in-out;
-    }
-
-    @keyframes lz-status-pulse {
-        0% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7);
+    <style>
+        /* ===================== 🎨 第一关专属：全站基础与导航栏样式 ===================== */
+        body {
+            background-color: #050505; /* 核心黑金底色 */
+            color: #ffffff;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
-        70% {
-            transform: scale(1);
-            box-shadow: 0 0 0 6px rgba(0, 255, 102, 0);
+
+        header {
+            height: 90px;
+            background: #0b0c0e;
+            border-bottom: 1px solid #1c1e22;
+            width: 100%;
+            position: sticky; /* 💡 核心学习点 2：悬浮固定特效，向下滚动时导航栏永远锁在最顶部 */
+            top: 0;
+            z-index: 9999;
         }
-        100% {
-            transform: scale(0.95);
-            box-shadow: 0 0 0 0 rgba(0, 255, 102, 0);
+
+        .header-container {
+            max-width: 1400px; /* 💡 核心学习点 3：限制最高内容宽度，在大屏幕上两边留白，保持高级感 */
+            width: 100%;
+            height: 100%;
+            margin: 0 auto;    /* 全自动居中对齐 */
+            display: flex;
+            justify-content: space-between; /* 强行让左边的 Logo 和右边的菜单两端弹开 */
+            align-items: center;            /* 让它们在 90px 的高度里垂直完美居中 */
+            padding: 0 40px;
+            box-sizing: border-box;
         }
-    }
 
-    .lz-db-tag {
-        font-size: 11px;
-        background: rgba(0, 255, 102, 0.06);
-        border: 1px solid rgba(0, 255, 102, 0.15);
-        padding: 4px 10px;
-        border-radius: 4px;
-        color: #00ff66;
-        font-weight: 600;
-    }
+        /* ─── Logo 区域控制（上下轴心结构） ─── */
+        .logo {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: 1px;
+            display: flex;
+            flex-direction: column; /* 💡 核心学习点 4：把默认的左右横排改成上下竖排 */
+            align-items: center;    /* 让大字和小字整体中轴线对齐 */
+            text-align: center;
+            line-height: 1.1;
+        }
 
-    .lz-db-grid {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
-        margin-bottom: 24px;
-    }
+        .logo span {
+            font-size: 11px;
+            color: #717681;
+            margin-top: 4px;        /* 控制小字离上方大字的垂直距离 */
+            letter-spacing: 1.5px;
+        }
 
-    .lz-db-card {
-        background: rgba(255, 255, 255, 0.02);
-        border: 1px solid rgba(255, 255, 255, 0.04);
-        border-radius: 8px;
-        padding: 16px;
-        display: flex;
-        flex-direction: column;
-        gap: 8px;
-        text-align: left;
-    }
+        /* ─── 导航菜单控制 ─── */
+        nav ul {
+            list-style: none; /* 清除自带的难看小圆点 */
+            display: flex;    /* 让菜单横向排开 */
+            gap: 40px;        /* 控制菜单按钮之间的横向间距 */
+            align-items: center;
+            margin: 0;
+            padding: 0;
+        }
 
-    .lz-db-label {
-        font-size: 12px;
-        color: #565b66;
-        font-weight: 500;
-        line-height: 1.2;
-    }
+        nav a {
+            text-decoration: none; /* 清除自带的下划线 */
+            color: #717681;
+            font-size: 14px;
+            font-weight: 600;
+            transition: 0.2s; /* 💡 核心学习点 5：变色过渡动效，让鼠标悬停时变色不突兀，非常丝滑 */
+        }
 
-    .lz-db-value {
-        font-size: 24px;
-        font-weight: 700;
-        color: #ffffff;
-        font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-        line-height: 1;
-    }
+        nav a:hover {
+            color: #ffd043; /* 鼠标放上去变成高档金黄色 */
+        }
 
-    .lz-db-gold {
-        color: #ffd043;
-    }
+        /* ─── 精确打磨：最后一个“会员服务”变成独立高亮按钮 ─── */
+        nav ul li:last-child a {
+            background: #ffd043;
+            color: #000000;
+            padding: 8px 22px;
+            border-radius: 30px; /* 完美的圆角胶囊按钮 */
+            font-weight: 700;
+        }
 
-    .lz-db-green {
-        color: #00ff66;
-    }
+        nav ul li:last-child a:hover {
+            background: #e0a927;
+            transform: translateY(-1px); /* 悬停时轻微往上浮动 1 像素，拉满交互感 */
+        }
+                /* ===================== 🎨 第二关专属：100% 铺满首屏 Hero 样式 ===================== */
+        .content-intro-text {
+            position: relative;
+            width: 100%;
 
-    .lz-db-chart-box {
-        background: rgba(0, 0, 0, 0.15);
-        border-radius: 8px;
-        padding: 16px;
-    }
+            /* 💡 核心学习点 4：锁死高度为满屏高度（100vh）减去导航栏的 90px。确保大背景图完美占满第一屏 */
+            height: calc(100vh - 90px);
+            min-height: 700px; /* 设置硬性防护底线，防止由于屏幕太矮导致文字重叠打架 */
 
-    .lz-db-chart-header {
-        display: flex;
-        justify-content: space-between;
-        font-size: 12px;
-        margin-bottom: 12px;
-    }
+            /* 自适应背景图经典调校公式 */
+            background-image: url('intro-bg.png');
+            background-size: cover;        /* 背景图全自动等比例切割，100%横向纵向铺满屏幕 */
+            background-position: center;   /* 背景图的核心核心点死死锁定在屏幕中央 */
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            overflow: hidden;
 
-    .lz-db-chart-title {
-        color: #565b66;
-    }
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
 
-    .lz-db-chart-percent {
-        color: #00ff66;
-        font-weight: 700;
-    }
+        .intro-overlay {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle, rgba(5,5,5,0.70) 0%, rgba(5,5,5,0.98) 100%);
+            z-index: 1;
+        }
 
-    .lz-db-svg {
-        width: 100%;
-        height: 60px;
-        display: block;
-    }
+        .intro-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 1200px;
+            width: 100%;
+            height: 100%;
+            padding: 0 0 40px 0; /* 底部预留 40px 安全空间给优势卡片 */
+            display: flex;
+            flex-direction: column;
+            box-sizing: border-box;
+        }
 
-    .lz-db-svg path {
-        stroke: #ffd043;
-        stroke-width: 2.5;
-        fill: none;
-        stroke-linecap: round;
-        filter: drop-shadow(0px 2px 8px rgba(255, 208, 67, 0.4));
-    }
+        /* 💡 核心学习点 5：弹性空间隔离。margin-top: auto 强行把标题整体往下推到黄金视线位，且彻底解除与其他大盒子的连带影响 */
+        .intro-hero {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 15px;
+            margin-top: auto;
+        }
 
-    /* ===================== 主体网格布局（文章列表） ===================== */
-    .container {
-        width: 100%;
-        max-width: 1400px;
-        margin: 30px auto;
-        padding: 0 20px;
-        box-sizing: border-box;
-    }
+        .content-intro-text h2 {
+            color: #ffd043;
+            /* clamp(最小, 自适应, 最大) 智能滑块字号，在手机上自动变小，在电脑上霸气变大，绝对不溢出换行 */
+            font-size: clamp(34px, 6.5vw, 72px);
+            font-weight: 800;
+            margin: 0;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            line-height: 1.1;
+        }
 
-    .content {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 25px;
-    }
+        .hero-subtitle {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 500;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            text-shadow: 0 1px 5px rgba(0,0,0,0.8);
+            opacity: 0.85;
+        }
 
-    .card {
-        background: #0f1115;
-        border: 1px solid #1c1e22;
-        border-radius: 12px;
-        overflow: hidden;
-        transition: 0.3s;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
-    }
+        /* ─── 荧光极客绿行动按钮控制 ─── */
+        .lozeno-cta-btn {
+            margin-top: 10px;
+            background: #00ff66; /* 💡 换上你指定的高级荧光科技绿背景 */
+            color: #000000;
+            border: none;
+            padding: 14px 40px;
+            border-radius: 16px;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: 0.2s;
+            box-shadow: 0 4px 20px rgba(0, 255, 102, 0.25); /* 绿色霓虹微弱发光阴影 */
+        }
 
-    .card:hover {
-        transform: translateY(-5px);
-        border-color: #ffd043;
-    }
+        .lozeno-cta-btn:hover {
+            transform: scale(1.03); /* 鼠标划过轻微放大，反馈极佳 */
+            background: #00cc52;    /* 悬停变成略深的深极客绿 */
+            box-shadow: 0 6px 25px rgba(0, 255, 102, 0.4);
+        }
 
-    .card img {
-        width: 100%;
-        height: 220px;
-        object-fit: cover;
-    }
+        /* ─── 夹在中间的联系方式胶囊控制 ─── */
+        .lz-contact-section-inline {
+            width: 100%;
+            margin-top: 35px;     /* 控制联系胶囊和上方绿色按钮的距离 */
+            margin-bottom: auto;  /* 💡 弹性留白：把下方的4个卡片死死卡在第一屏的最底边缘不动 */
+            display: flex;
+            justify-content: center;
+        }
 
-    .card-content {
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        height: 180px;
-        box-sizing: border-box;
-    }
+        .contact-methods-inline {
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
 
-    .card h3 {
-        font-size: 20px;
-        line-height: 1.5;
-        margin-bottom: 12px;
-        min-height: 60px;
-    }
+        .contact-tag-inline {
+            background: rgba(15, 17, 21, 0.85);
+            border: 1px solid rgba(255, 208, 67, 0.2);
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-size: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            transition: 0.3s;
+        }
 
-    .card h3 a {
-        text-decoration: none;
-        color: #ffffff;
-    }
+        .contact-tag-inline:hover {
+            border-color: #ffd043;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 35px rgba(255, 208, 67, 0.1);
+        }
 
-    .card h3 a:hover {
-        color: #ffd043;
-    }
+        .card-icon-inline { font-size: 18px; }
+        .lz-highlight-inline { color: #ffd043; font-weight: 800; }
 
-    .card p {
-        color: #717681;
-        line-height: 1.8;
-        font-size: 14px;
-        flex: 1;
-        margin: 0;
-    }
+        /* ─── 四大优势卡片控制（一字横排） ─── */
+        .intro-stats {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 120px;
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 40px; /* 💡 核心复习：原本这里是0，在这里你可以随意修改具体的像素，单独把4个大卡片往上提，绝对不影响上方的标题！ */
+        }
 
-    .date {
-        margin-top: auto;
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
 
-        /* ===================== 📱 专为手机端（超窄屏）高精度自适应调校 ===================== */
+        .stat-item h3 {
+            color: #ffd043;
+            font-size: 36px;
+            font-weight: 800;
+            margin: 0 0 12px 0;
+            letter-spacing: -0.5px;
+            font-family: 'SF Pro Display', sans-serif;
+        }
+
+        .stat-item p {
+            color: #565b66;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            margin: 0;
+        }
+        /* ===================== 🎨 第三关专属：📈 独立仪表盘高规格样式 ===================== */
+        .independent-dashboard-section {
+            width: 100%;
+            background: #050505; /* 保持一致的纯黑底色 */
+            padding: 100px 20px 60px 20px; /* 上下各留出宽敞的滚动呼吸间距 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .lz-db-dashboard {
+            width: 480px;
+            background: rgba(15, 15, 15, 0.85); /* 半透明黑拟态 */
+            border: 1px solid rgba(255, 255, 255, 0.08); /* 极细磨砂质感边框 */
+            border-radius: 16px;
+            padding: 24px;
+            backdrop-filter: blur(12px); /* 💡 核心学习点 4：高级毛玻璃特效，让背景微微虚化，高科技感拉满 */
+            -webkit-backdrop-filter: blur(12px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .lz-db-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            padding-bottom: 14px;
+            margin-bottom: 20px;
+            width: 100%;
+        }
+
+        .lz-db-status {
+            font-size: 14px;
+            font-weight: 600;
+            color: #8a9bb4;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        /* 🟢 信号灯呼吸发光动效控制 ─── */
+        .lz-db-dot {
+            width: 8px;
+            height: 8px;
+            background-color: #00ff66; /* 呼应绿按钮 */
+            border-radius: 50%;
+            /* 💡 核心学习点 5：注册一个名为 lz-status-pulse 的无限循环呼吸动画 */
+            animation: lz-status-pulse 2s infinite ease-in-out;
+        }
+
+        @keyframes lz-status-pulse {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(0, 255, 102, 0); } /* 阴影向外平滑扩散并变淡 */
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(0, 255, 102, 0); }
+        }
+
+        .lz-db-tag {
+            font-size: 11px;
+            background: rgba(0, 255, 102, 0.06);
+            border: 1px solid rgba(0, 255, 102, 0.15);
+            padding: 4px 10px;
+            border-radius: 4px;
+            color: #00ff66;
+            font-weight: 600;
+        }
+
+        /* 强力锁定田字格网格，阻断任何垂直拉伸 ─── */
+        .lz-db-grid {
+            display: grid !important;
+            grid-template-columns: repeat(2, 1fr) !important; /* 强制两列并排 */
+            gap: 16px !important;
+            margin-bottom: 24px !important;
+            width: 100% !important;
+        }
+
+        .lz-db-card {
+            background: rgba(255, 255, 255, 0.02) !important;
+            border: 1px solid rgba(255, 255, 255, 0.04) !important;
+            border-radius: 8px !important;
+            padding: 16px !important;
+            display: flex !important;
+            flex-direction: column !important;
+            gap: 8px !important;
+            text-align: left !important;
+            box-sizing: border-box !important;
+        }
+
+        .lz-db-label {
+            font-size: 12px !important;
+            color: #565b66 !important;
+            font-weight: 500 !important;
+            line-height: 1.2 !important;
+            margin: 0 !important;
+        }
+
+        .lz-db-value {
+            font-size: 24px !important;
+            font-weight: 700 !important;
+            color: #ffffff !important;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif !important;
+            line-height: 1 !important;
+            margin: 0 !important;
+        }
+
+        .lz-db-gold { color: #ffd043 !important; }
+        .lz-db-green { color: #00ff66 !important; }
+
+        /* SVG 线条霓虹倒影控制 ─── */
+        .lz-db-chart-box {
+            background: rgba(0, 0, 0, 0.15) !important;
+            border-radius: 8px !important;
+            padding: 16px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+        }
+
+        .lz-db-chart-header {
+            display: flex !important;
+            justify-content: space-between !important;
+            font-size: 12px !important;
+            margin-bottom: 12px !important;
+        }
+
+        .lz-db-chart-title { color: #565b66 !important; }
+        .lz-db-chart-percent { color: #00ff66 !important; font-weight: 700 !important; }
+
+        .lz-db-svg {
+            width: 100% !important;
+            height: 60px !important;
+            display: block !important;
+        }
+
+        .lz-db-svg path {
+            stroke: #ffd043 !important;
+            stroke-width: 2.5 !important;
+            fill: none !important;
+            stroke-linecap: round !important;
+            /* 💡 核心学习点 6：霓虹光晕滤镜。给折线图增加一层亮金色的虚化光芒，科技感的核心来源 */
+            filter: drop-shadow(0px 2px 8px rgba(255, 208, 67, 0.4)) !important;
+        }
+        /* ===================== 🎨 第四关专属：🌟 战绩背书黑金巨幕样式 ===================== */
+        .lz-achievement-section {
+            width: 100%;
+            background: #050505; /* 严格对齐整站一致的纯深黑色底色 */
+            padding: 70px 20px;  /* 给予这个新板块舒适的垂直滚动呼吸空间 */
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lz-achievement-container {
+            max-width: 1200px;
+            width: 100%;
+            display: flex;
+            flex-direction: column; /* 💡 核心学习点 2：严格强制开启纵向排列，雷打不动死守四行垂直逻辑 */
+            align-items: center;    /* 让所有文字、按钮在中轴线上绝对居中对齐 */
+            text-align: center;
+            gap: 16px;              /* 精准控制四行内容彼此之间的上下垂直间距 */
+        }
+
+        /* 第一行：已实现总共获利 */
+        .lz-ach-label {
+            color: #717681;         /* 高档耐看的高级暗灰色 */
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 2px;    /* 稍微拉开字间距，拉满量化机构的专业感 */
+            text-transform: uppercase;
+            margin: 0;
+        }
+
+        /* 第二行：$126,337 暴利感巨幕大数字 */
+        .lz-ach-value {
+            color: #ffd043;         /* 耀眼的黄金色，作为整个板块最具杀伤力的视觉焦点 */
+
+            /* 💡 核心学习点 3：智能字号防护罩。电脑大屏上飙到84px极限特粗黑体，手机窄屏上自动无缝缩减至44px，100%防超屏或断行 */
+            font-size: clamp(44px, 7.5vw, 84px);
+
+            font-weight: 900;       /* 开启整个网页代码中最粗的特粗体，营造强大的实力背书 */
+            line-height: 1;
+            letter-spacing: -1px;   /* 略微锁紧数字之间的间距，非常有大牌对冲基金的厚重视觉分量 */
+            margin: 4px 0;
+            text-shadow: 0 4px 20px rgba(255, 208, 67, 0.15); /* 为黄金数字在夜幕背景上镀上一层微弱的霓虹发光特效 */
+        }
+
+        /* 第三行：实时跟单人数超过 2,000+ */
+        .lz-ach-subtext {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            opacity: 0.85;          /* 适当调低白字的透明度，形成完美的视觉主次层级 */
+            letter-spacing: 1px;
+            margin: 0 0 10px 0;     /* 额外给脚底下的“立即获得”按钮留出足够的点触安全空间 */
+        }
+
+        /* 第四行：转化按钮的包裹器 */
+        .lz-ach-action {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* 💡 核心学习点 4：类名穿透重写。特定让这个卡片里的按钮，自动换上我们最新的【荧光科技绿】调色盘 */
+        .lz-ach-action .lozeno-cta-btn {
+            margin-top: 0;
+            background: #00ff66 !important;
+            box-shadow: 0 4px 25px rgba(0, 255, 102, 0.25) !important;
+        }
+
+        .lz-ach-action .lozeno-cta-btn:hover {
+            background: #00cc52 !important;
+            transform: scale(1.03);
+            box-shadow: 0 6px 30px rgba(0, 255, 102, 0.4) !important;
+        }
+        /* ===================== 🎨 补齐遗漏：全局金光分割线专属样式 ===================== */
+        .lz-global-divider {
+            width: 100%;
+            border: none;      /* 💡 核心学习点 1：清除浏览器默认自带的难看粗边框 */
+            height: 1px;       /* 💡 核心学习点 2：锁死盒子高度为极纤细的 1 像素，营造精致感 */
+
+            /* 💡 核心学习点 3：华尔街大牌对冲基金最爱的“线性渐变隐去”动效 */
+            /* linear-gradient(to right, ...) 意思是从左到右进行颜色渐变 */
+            /* 0% (最左侧)：rgba(5,5,5,0) ➔ 纯黑底色，但最后一位是 0，代表 100% 完全透明隐藏 */
+            /* 50% (正中央)：rgba(255, 208, 67, 0.3) ➔ 标志性的亮金黄色，最后一位是 0.3，代表带有一层 30% 半透明的柔和微光 */
+            /* 100% (最右侧)：rgba(5,5,5,0) ➔ 再次变回 100% 完全透明隐藏 */
+            background: linear-gradient(to right, rgba(5,5,5,0) 0%, rgba(255, 208, 67, 0.3) 50%, rgba(5,5,5,0) 100%);
+
+            /* 💡 核心学习点 4：盒子的垂直防护罩（外边距） */
+            /* 40px 代表它的【头顶】和【脚底】雷打不动空出 40 像素的真空物理隔离带，把战绩盒子优雅地推开 */
+            /* 0 代表左右两边不留空隙，横向彻底平铺撑满 */
+            margin: 40px 0;
+
+            box-sizing: border-box;
+        }
+        /* ===================== 🎨 补齐：纯净 4 列文章容器与悬浮卡片样式 ===================== */
+        .container {
+            width: 100%;
+            max-width: 1400px; /* 💡 核心学习点 1：锁死整站最高内容宽度上限，大屏下自动两侧留白居中 */
+            margin: 30px auto; /* 保证容器在水平正中央完美对齐 */
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        /* ─── 4 列卡片网格布局控制 ─── */
+        .content {
+            display: grid; /* 💡 核心学习点 2：开启 Grid 网格布局 */
+            grid-template-columns: repeat(4, 1fr); /* 💡 核心学习点 3：强制在电脑端横向拉开 4 列，每列完全等宽 */
+            gap: 25px; /* 卡片与卡片之间的缝隙全部锁死为 25px */
+        }
+
+        /* ─── 单张卡片基础皮肤 ─── */
+        .card {
+            background: #0f1115; /* 高端黑金调性的暗灰色卡片底色 */
+            border: 1px solid #1c1e22;
+            border-radius: 12px;
+            overflow: hidden; /* 图片带圆角裁切效果，防止溢出边框 */
+            transition: 0.3s ease; /* 开启 0.3 秒丝滑缓动动效 */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* 💡 核心学习点 4：悬浮动效！鼠标一划过，卡片向上丝滑浮起 5 像素，边框变亮金 */
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: #ffd043;
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover; /* 图片防变形核心：自动裁剪等比例填满，绝不拉伸扭曲 */
+        }
+
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            height: 180px; /* 卡片文字区硬性锁死固定总高 */
+            box-sizing: border-box;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            line-height: 1.5;
+            margin: 0 0 12px 0;
+            min-height: 60px; /* 💡 核心学习点 5：强制锁死标题至少占 3 行高度，防卡片高低不平 */
+        }
+
+        .card h3 a {
+            text-decoration: none;
+            color: #ffffff;
+            transition: 0.2s;
+        }
+
+        .card h3 a:hover {
+            color: #ffd043;
+        }
+
+        .card p {
+            color: #717681;
+            line-height: 1.8;
+            font-size: 14px;
+            flex: 1; /* 弹性分摊：自动吃掉中间剩下的所有高度 */
+            margin: 0;
+        }
+
+        .date {
+            margin-top: auto; /* 安全锁：不管简介写多长，日期永远死死卡在卡片最底端 */
+            padding-top: 15px;
+            color: #999;
+            font-size: 13px;
+        }
+
+        /* 📱 手机端超窄屏完美自适应防溢出 */
+        @media (max-width: 950px) {
+            .content { grid-template-columns: repeat(2, 1fr); } /* 平板变成两列 */
+        }
         @media (max-width: 500px) {
-            /* --- 1. 彻底修复头部导航栏错位 --- */
-            header {
-                height: auto; /* 手机端允许高度自适应，防止卡死 90px 导致文字溢出 */
-                padding: 15px 0;
-            }
-
-            .header-container {
-                flex-direction: column; /* 手机端让 Logo 和 导航菜单 变成上下叠放 */
-                gap: 12px;
-                padding: 0 15px;
-            }
-
-            .logo {
-                font-size: 24px; /* 手机端缩小 Logo 主标题字号 */
-            }
-
-            .logo span {
-                font-size: 10px; /* 手机端缩小 Logo 副标题字号 */
-            }
-
-            nav ul {
-                gap: 10px; /* 剧烈缩减菜单之间的横向间距，防止文字打架 */
-                flex-wrap: wrap; /* 💡 核心：如果按钮太多，允许它们自动换到下一行，绝不重叠 */
-                justify-content: center;
-            }
-
-            nav a {
-                font-size: 12px; /* 降低菜单文字字号 */
-                padding: 4px 6px;
-            }
-
-            nav ul li:last-child a {
-                padding: 6px 14px; /* 缩小最后一个“会员服务”黄色按钮的内边距 */
-                font-size: 12px;
-            }
-
-            /* --- 2. 彻底修复 Hero 巨幕区在手机端的包裹感 --- */
-            .content-intro-text {
-                height: auto; /* 💡 致命核心：手机端垂直空间不够，【绝对不能写死 100vh】，必须改为 auto 让内容自然向下撑开！ */
-                min-height: 100vh; /* 保证至少有一屏高 */
-                padding: 40px 15px; /* 缩减上下内边距 */
-            }
-
-            .intro-content {
-                justify-content: center;
-                gap: 35px; /* 用统一的间距拉开组件，代替 auto */
-                padding: 0;
-            }
-
-            .content-intro-text h2 {
-                font-size: 36px; /* 💡 核心：把超大的 72px 缩小到 36px，防止手机端单词断行或超屏 */
-                line-height: 1.2;
-            }
-
-            .hero-subtitle {
-                font-size: 14px; /* 缩小副标题 */
-                padding: 0 10px;
-            }
-
-            /* --- 3. 彻底修复联系方式胶囊 --- */
-            .contact-methods-inline {
-                flex-direction: column; /* 手机端微信和TG必须上下叠放 */
-                align-items: center;
-                gap: 12px;
-                width: 100%;
-            }
-
-            .contact-tag-inline {
-                width: 90%; /* 撑开胶囊宽度，让手机端点触更方便 */
-                justify-content: center;
-                padding: 12px 20px;
-                font-size: 14px;
-            }
-
-            /* --- 4. 彻底修复 4 大核心优势在手机端的毁灭性重叠 --- */
-            .intro-stats {
-                flex-direction: column; /* 💡 致命核心：横排直接改竖排！让 4 个数字从左到右并排，变成从上到下整齐排队 */
-                align-items: center;
-                gap: 25px; /* 设置舒适的上下间距 */
-                margin-top: 20px;
-            }
-
-            .stat-item h3 {
-                font-size: 32px; /* 适度缩小优势数字 */
-                margin-bottom: 6px;
-            }
-
-            .stat-item p {
-                font-size: 11px;
-                letter-spacing: 2px; /* 适度紧缩字间距防换行 */
-            }
+            .content { grid-template-columns: 1fr; } /* 手机强制变单列上下整齐排队 */
         }
-
 
     </style>
 </head>
 <body>
-<header>
-    <div class="header-container">
-        <div class="logo">
-            LOZENO.EA
-            <span>STRATEGY.FIRST</span> <!-- 修正了 FIRST 的拼写 -->
-        </div>
-        <nav>
-            <ul>
-                <li><a href="index.html">首页</a></li>
-                <li><a href="javascript:void(0);">最新分析</a></li> <!-- 替换了 # 防跳顶 -->
-                <li><a href="videos.html">最新视频</a></li>
-                <li><a href="free-resources.html">免费资源</a></li>
-                <li><a href="javascript:void(0);">会员服务</a></li> <!-- 替换了 # 防跳顶 -->
-            </ul>
-        </nav>
-    </div>
-</header>
-
-
-<!-- ⬇️ 【完整内容】居中文案组件：横跨3列，不破坏大框架 ⬇️ -->
-<!-- ==================== 2️⃣ 专属 100% 全屏 Hero 大盒子 ==================== -->
-<!-- 💡 它的唯一使命：完美吞没第一屏，展示你指定的 5 样东西，绝对不让仪表盘挤上来 -->
-<div class="content-intro-text">
-
-    <div class="intro-overlay"></div> <!-- 暗化遮罩 -->
-
-    <div class="intro-content">
-
-        <!-- ① 主标题与副标题 -->
-        <div class="intro-hero">
-            <h2>运用LOZENO策略进行交易</h2>
-            <p class="hero-subtitle">让自动化 EA 成为您的智能交易与财富增值引擎</p>
-
-            <!-- ② 呼吁行动按钮 -->
-            <div class="cta-box">
-                <button class="lozeno-cta-btn">免费获取 ✦</button>
+    <header>
+        <div class="header-container">
+            <!-- 左侧品牌 Logo 盒子 -->
+            <div class="logo">
+                LOZENO.EA
+                <span>STRATEGY.FIRST</span>
             </div>
+            <!-- 右侧导航菜单 -->
+            <nav>
+                <ul>
+                    <li><a href="index.html">首页</a></li>
+                    <li><a href="javascript:void(0);">最新分析</a></li>
+                    <li><a href="videos.html">最新视频</a></li>
+                    <li><a href="free-resources.html">免费资源</a></li>
+                    <li><a href="javascript:void(0);">会员服务</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+    <!-- ==================== 🟦 骨架 2：100% 全屏首屏 Hero 大盒子 ==================== -->
+    <!-- 💡 核心学习点 1：大背景图、暗色遮罩和所有核心内容全部住在这个大盒子里 -->
+    <div class="content-intro-text">
 
-        <!-- ③ 联系方式胶囊区（完美融合在首屏中） -->
-        <div class="lz-contact-section-inline">
-            <div class="contact-methods-inline">
-                <div class="contact-tag-inline">
-                    <span class="card-icon-inline">💬</span>
-                    官方微信 / 企微: <strong class="lz-highlight-inline">LOZENO_EA</strong>
-                </div>
-                <div class="contact-tag-inline">
-                    <span class="card-icon-inline">✈️</span>
-                    Telegram 频道: <strong class="lz-highlight-inline">@LOZENO_EA</strong>
+        <!-- 🎨 遮罩层盒子：在背景图上方加一层半透明黑光，让上面的文字看得清清楚楚 -->
+        <div class="intro-overlay"></div>
+
+        <!-- 📦 内容垂直对齐的中间容器 -->
+        <div class="intro-content">
+
+            <!-- ① 主标题、副标题与绿色行动按钮小盒子 -->
+            <div class="intro-hero">
+                <h2>运用LOZENO策略进行交易</h2>
+                <p class="hero-subtitle">让自动化 EA 成为您的智能交易与财富增值引擎</p>
+                <div class="cta-box">
+                    <button class="lozeno-cta-btn">免费获取 ✦</button>
                 </div>
             </div>
-        </div>
 
-        <!-- ④ 4大核心优势数字 -->
-        <div class="intro-stats">
-            <div class="stat-item">
-                <h3>$150K</h3>
-                <p>MAX ACCOUNT</p>
+            <!-- ② 💡 核心学习点 2：夹在中间的联系方式胶囊小盒子，方便用户一进站就直接添加 -->
+            <div class="lz-contact-section-inline">
+                <div class="contact-methods-inline">
+                    <div class="contact-tag-inline">
+                        <span class="card-icon-inline">💬</span>
+                        官方微信 / 企微: <strong class="lz-highlight-inline">LOZENO_EA</strong>
+                    </div>
+                    <div class="contact-tag-inline">
+                        <span class="card-icon-inline">✈️</span>
+                        Telegram 频道: <strong class="lz-highlight-inline">@LOZENO_EA</strong>
+                    </div>
+                </div>
             </div>
-            <div class="stat-item">
-                <h3>90%</h3>
-                <p>PROFIT SPLIT</p>
-            </div>
-            <div class="stat-item">
-                <h3>7 Days</h3>
-                <p>MIN TO PAYOUT</p>
-            </div>
-            <div class="stat-item">
-                <h3>TOP</h3>
-                <p>SUPPORT</p>
-            </div>
-        </div>
 
+            <!-- ③ 💡 核心学习点 3：最底部的四大核心优势，通过 CSS 控制它必须锁死在首屏底边缘 -->
+            <div class="intro-stats">
+                <div class="stat-item">
+                    <h3>$150K</h3>
+                    <p>MAX ACCOUNT</p>
+                </div>
+                <div class="stat-item">
+                    <h3>90%</h3>
+                    <p>PROFIT SPLIT</p>
+                </div>
+                <div class="stat-item">
+                    <h3>7 Days</h3>
+                    <p>MIN TO PAYOUT</p>
+                </div>
+                <div class="stat-item">
+                    <h3>TOP</h3>
+                    <p>SUPPORT</p>
+                </div>
+            </div>
+
+        </div>
     </div>
-</div>
+    <!-- ==================== 🟪 骨架 3：独立的一级大盒子：实盘监控仪表盘 ==================== -->
+    <!-- 💡 核心学习点 1：它在首屏大盒子的外面，成了并列独立的一级盒子，下滚时才作为一个重磅板块登场 -->
+    <div class="independent-dashboard-section">
 
-
-<!-- ==================== 3️⃣ 💡 全新独立的一级盒子：实盘监控仪表盘 ==================== -->
-<!-- 💡 把它彻底从首屏中解放出来！只有向下滑动，它才会作为一个惊艳的重磅板块赫然出现 -->
-<div class="independent-dashboard-section">
-    <div class="lz-dashboard-wrapper">
+        <!-- 📦 480px 宽度的实体玻璃拟态大卡片 -->
         <div class="lz-db-dashboard">
+
+            <!-- ① 状态头部区 -->
             <div class="lz-db-header">
                 <div class="lz-db-status">
+                    <!-- 💡 核心学习点 2：这是一枚带有动态呼吸动画的信号灯小圆点 -->
                     <span class="lz-db-dot"></span>
                     LOZENO EA v4.2 实盘监控中
                 </div>
                 <div class="lz-db-tag">AI 神经网络算法</div>
             </div>
+
+            <!-- ② 数据面板田字格（强制锁死网格，防止文字无故堆叠） -->
             <div class="lz-db-grid">
                 <div class="lz-db-card">
                     <div class="lz-db-label">历史风控胜率 (Win Rate)</div>
@@ -723,111 +700,95 @@
                     <div class="lz-db-value">14,892 笔</div>
                 </div>
             </div>
+
+            <!-- ③ SVG 净值发光曲线图区 -->
             <div class="lz-db-chart-box">
                 <div class="lz-db-chart-header">
                     <span class="lz-db-chart-title">净值增长曲线 (Equity Curve)</span>
                     <span class="lz-db-chart-percent">+342.8%</span>
                 </div>
+                <!-- 💡 核心学习点 3：用极其轻量的数学线条（SVG）在网页里精确勾勒出一条亮黄色、自带渐变倒影发光的成长曲线 -->
                 <svg class="lz-db-svg" viewBox="0 0 400 60">
                     <path d="M 10 50 Q 100 45 200 30 T 390 10"/>
                 </svg>
             </div>
+
         </div>
-    </div>
-</div>
+    </div> <!-- 💡 完美的独立仪表盘大盒子闭合出口 -->
 
-<hr class="lz-global-divider">
+    <!-- ==================== 🌟 骨架 4：全新战绩背书与“立即获得 ✦”转化大盒子 ==================== -->
+    <!-- 💡 核心学习点 1：用专属的独立一级类名包裹，精准塞在仪表盘下方、分割线前方的黄金真空地带 -->
+    <div class="lz-achievement-section">
+        <div class="lz-achievement-container">
 
+            <!-- 第一行：大局标签说明 -->
+            <div class="lz-ach-label">已实现总共获利</div>
 
-</div>
-</div>
+            <!-- 第二行：震撼的财富核心巨幕数字 -->
+            <div class="lz-ach-value">$126,337</div>
 
+            <!-- 第三行：强大的社交信任背书小字 -->
+            <div class="lz-ach-subtext">实时跟单人数超过 2,000+</div>
 
-<div class="container">
-    <div class="content" id="articleContainer"><!-- 这里由 JavaScript 动态生成卡片 --></div>
-    <div class="pagination" id="pagination"></div>
-    <div class="content-footer-text">
-        <h3>© XAUUSD.EA 技术支持与风险提示</h3>
-        <p>这里可以填写你网站的版权声明、风险提示、免责细则，或者任何你想对读者说的话。它会自动在 4
-            个卡片的正下方完美居中并横向铺满展示。</p>
-    </div>
-</div>
-
-
-<footer>
-    © 2026 zackxau | Gold Trading Room
-</footer>
-
-<script>
-    const cardsPerPage = 6;
-    let currentPage = 1;
-    let allCards = [];
-
-    // 分页切换显示逻辑
-    function showPage(page) {
-        currentPage = page;
-        allCards.forEach((card, index) => {
-            if (index >= (page - 1) * cardsPerPage && index < page * cardsPerPage) {
-                card.style.display = 'block';
-            } else {
-                card.style.display = 'none';
-            }
-        });
-        createButtons();
-    }
-
-    // 动态创建分页按钮
-    function createButtons() {
-        const totalPages = Math.ceil(allCards.length / cardsPerPage);
-        const pagination = document.getElementById('pagination');
-        pagination.innerHTML = '';
-
-        for (let i = 1; i <= totalPages; i++) {
-            const btn = document.createElement('button');
-            btn.innerText = i;
-            if (i === currentPage) {
-                btn.classList.add('active');
-            }
-            btn.onclick = () => showPage(i);
-            pagination.appendChild(btn);
-        }
-    }
-
-    // 异步抓取 JSON 数据并渲染
-    fetch('articles.json')
-        .then(res => res.json())
-        .then(data => {
-            const container = document.getElementById('articleContainer');
-            container.innerHTML = ''; // 清空容器
-
-            data.forEach(article => {
-                container.innerHTML += `
-        <div class="card">
-            <a href="${article.url}">
-                <img src="${article.thumbnail}" alt="图片描述">
-            </a>
-            <div class="card-content">
-                <h3>
-                    <a href="${article.url}">
-                        ${article.title}
-                    </a>
-                </h3>
-                <p>${article.description}</p>
-                <div class="date">
-                    ${article.date}
-                </div>
+            <!-- 第四行：引导点击的核心转化按钮盒子 -->
+            <div class="lz-ach-action">
+                <button class="lozeno-cta-btn">立即获得 ✦</button>
             </div>
-        </div>
-        `;
-            });
 
-            // 渲染完成后获取所有的卡片节点，并初始化分页
-            allCards = document.querySelectorAll('.card');
-            showPage(1);
-        })
-        .catch(err => {
-            console.error("加载文章数据失败:", err);
-        });
-</script>
+        </div>
+    </div> <!-- 💡 战绩背书盒子闭合出口 -->
+
+<!-- region 🟧 专属视觉章节：金光分割线盒子 -->
+<hr class="lz-global-divider">
+<!-- endregion -->
+           <!-- ==================== 🟨 骨架 5：纯净主体动态文章大容器 ==================== -->
+    <!-- 💡 核心学习点：它被彻底洗干净了，里面只有 4 个卡片动态生成的总停机坪，没有任何多余噪音 -->
+    <div class="container">
+        <div class="content" id="articleContainer"></div>
+    </div>
+
+
+    <!-- ==================== 📜 终极核心：你的专属最新 4 篇文章数据抓取引擎 ==================== -->
+    <script>
+        // 💡 异步抓取本地 JSON 数据并动态渲染（百分之百你原本的高级 fetch 架构）
+        fetch('articles.json')
+            .then(res => res.json())
+            .then(data => {
+                const container = document.getElementById('articleContainer');
+                if (!container) return;
+                container.innerHTML = ''; // 清空可能残留的旧占位骨架
+
+                // 💡 核心逻辑：精准拦截并只提取 JSON 数据中最前面的 4 个最新文章
+                const latestArticles = data.slice(0, 4);
+
+                latestArticles.forEach(article => {
+                    // 💡 严格对齐：百分之百保留了你原本的 a 标签图片包裹与卡片文字层级结构
+                    container.innerHTML += `
+                        <div class="card">
+                            <a href="${article.url}">
+                                <img src="${article.thumbnail}" alt="图片描述">
+                            </a>
+                            <div class="card-content">
+                                <h3>
+                                    <a href="${article.url}">
+                                        ${article.title}
+                                    </a>
+                                </h3>
+                                <p>${article.description}</p>
+                                <div class="date">
+                                    ${article.date}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                });
+            })
+            .catch(err => {
+                console.error("加载文章数据失败，请检查本地 articles.json 文件是否存在或格式是否正确:", err);
+            });
+    </script>
+
+
+
 </body>
 </html>
