@@ -1,5 +1,12 @@
 [
   {
+    "title": "这是一篇测试文章",
+    "description": "看js还能不能正常工作",
+    "date": "2026-06-30",
+    "thumbnail": "/resources/1782808773654-人物_00298_.png",
+    "url": "article.html?post=2026-06-30-这是一篇测试文章.md"
+  },
+  {
     "title": "官方法国大使馆广泛豆腐干是个复读生",
     "description": "的是高贵的分光光度法事故发生",
     "date": "2026-06-29",
