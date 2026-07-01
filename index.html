@@ -603,48 +603,11 @@
         }
 
         /* 📱 手机端超窄屏完美自适应防溢出 */
-                /* =========================================================================
-           📱 终极全站死锁：全平台响应式自适应控制中枢 (100% 解决 4列卡片 与 导航栏问题)
-           ========================================================================= */
-
-        /* ─── ❶ 中屏断点（平板设备：1200px ~ 950px） ─── */
-        @media (max-width: 1200px) {
-            .content { grid-template-columns: repeat(3, 1fr) !important; } /* 文章变 3 列 */
-            .lz-smc-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; } /* SMC变两两并排 */
-        }
-
-        /* ─── ❷ 小屏断点（小平板与大屏手机：950px ~ 768px） ─── */
         @media (max-width: 950px) {
-            .content { grid-template-columns: repeat(2, 1fr) !important; } /* 文章变两两并排 */
-            .lz-smc-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 20px !important; }
+            .content { grid-template-columns: repeat(2, 1fr); } /* 平板变成两列 */
         }
-
-        /* ─── ❸ 终极死锁断点（所有标准智能手机：768px 以下） ─── */
-        @media (max-width: 768px) {
-
-            /* 🚀 攻克堡垒 1：彻底规避导航栏散架！隐去繁琐菜单，左右锁死并排，变高奢胶囊按钮 */
-            header { height: 70px !important; }
-            .header-container { padding: 0 20px !important; display: flex !important; flex-direction: row !important; justify-content: space-between !important; align-items: center !important; }
-            .logo { font-size: 20px !important; align-items: flex-start !important; text-align: left !important; }
-            .logo span { font-size: 9px !important; margin-top: 2px !important; }
-            nav ul li:not(:last-child) { display: none !important; } /* 抹除其余普通文字菜单 */
-            nav ul { gap: 0 !important; }
-            nav ul li:last-child a { font-size: 12px !important; padding: 6px 14px !important; white-space: nowrap !important; }
-
-            /* 🚀 攻克堡垒 2：彻底消灭 4 列挤压！SMC卡片强制变成 1 列，从上往下整齐叠放 */
-            .lz-smc-grid {
-                grid-template-columns: 1fr !important; /* 💡 击碎电脑端 4 列死锁，变 1 列自适应 */
-                gap: 20px !important;
-            }
-            .lz-smc-card { padding: 35px 20px !important; } /* 收紧内衬防文字换行溢出 */
-
-            /* 🚀 攻克堡垒 3：彻底消灭文章挤压！最新文章卡片在手机端也同步全自动切回 1 列垂直排队 */
-            .content {
-                grid-template-columns: 1fr !important; /* 💡 击碎 repeat(4, 1fr) 铁律，变 1 列自适应 */
-                gap: 20px !important;
-            }
-            .card { width: 100% !important; }
-            .card img { height: 190px !important; } /* 手机端图片自动变矮 */
+        @media (max-width: 500px) {
+            .content { grid-template-columns: 1fr; } /* 手机强制变单列上下整齐排队 */
         }
 
 
@@ -995,6 +958,25 @@
         }
 .lz-light-gold { color: #ffd043; }
 
+
+/* 你原来的CSS... */
+
+/* ===== 修复代码放这里（最下面） ===== */
+
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 60px 20px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+body {
+  margin: 0;
+  overflow-x: hidden;
+}
+
+</style>
     </style>
 </head>
 <body>
