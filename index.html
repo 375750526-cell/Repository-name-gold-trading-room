@@ -1002,6 +1002,51 @@
             box-shadow: 0 0 10px rgba(255, 208, 67, 0.5);
         }
 .lz-light-gold { color: #ffd043; }
+        /* ===================== 📱 核心加装：第一屏专属自适应安全防护盾 ===================== */
+        /* 💡 当用户的手机屏幕变窄时，最高优先权的重构指令全自动无缝生效 */
+        @media (max-width: 768px) {
+
+            /* ❶ 物理拆除高度死锁，把 700px 解放为弹性流式高度，防止最底下的卡片被吞 */
+            .content-intro-text {
+                height: auto !important;
+                min-height: 100vh !important;
+                padding: 110px 20px 60px 20px !important; /* 留出上下呼吸气垫 */
+            }
+            .intro-content {
+                justify-content: center !important;
+                gap: 40px !important;
+                padding: 0 !important;
+            }
+            .intro-hero {
+                margin-top: 0 !important;
+            }
+
+            /* ❷ 联系卡片在手机端全自动变成单列，大方展开 */
+            .contact-methods-inline {
+                flex-direction: column !important;
+                align-items: center !important;
+                gap: 12px !important;
+                width: 100% !important;
+            }
+            .contact-tag-inline {
+                width: 90% !important;
+                justify-content: center !important;
+                padding: 12px 20px !important;
+                font-size: 14px !important;
+            }
+
+            /* ❸ 💡 终极纠正暗号：强行击碎电脑端 120px 间距，让 .intro-stats 在手机端完美展现为 2x2 四宫格！ */
+            .intro-stats {
+                display: grid !important; /* 激活手机网格 */
+                grid-template-columns: repeat(2, 1fr) !important; /* 强行在手机端变成两行两列 */
+                gap: 30px 10px !important; /* 上下空 30px，左右空 10px，完美锁死在手机中间 */
+                margin: 0 auto !important;
+                width: 100% !important;
+                max-width: 500px;
+            }
+            .stat-item h3 { font-size: 28px !important; margin: 0 0 6px 0 !important; }
+            .stat-item p { font-size: 10px !important; letter-spacing: 2px !important; }
+        }
 
     </style>
 </head>
