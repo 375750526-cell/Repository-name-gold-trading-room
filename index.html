@@ -93,26 +93,28 @@
             transform: translateY(-1px); /* 悬停时轻微往上浮动 1 像素，拉满交互感 */
         }
                 /* ===================== 🎨 第二关专属：100% 铺满首屏 Hero 样式 ===================== */
-      .content-intro-text {
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
-    min-height: 100dvh;
-    height: auto;   /* ❗关键：不要 calc */
+        .content-intro-text {
+            position: relative;
+            width: 100%;
 
-    background-image: url('intro-bg.png');
-    background-size: cover;
-    background-position: center;
+            /* 💡 核心学习点 4：锁死高度为满屏高度（100vh）减去导航栏的 90px。确保大背景图完美占满第一屏 */
+            height: calc(100vh - 90px);
+            min-height: 700px; /* 设置硬性防护底线，防止由于屏幕太矮导致文字重叠打架 */
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+            /* 自适应背景图经典调校公式 */
+            background-image: url('intro-bg.png');
+            background-size: cover;        /* 背景图全自动等比例切割，100%横向纵向铺满屏幕 */
+            background-position: center;   /* 背景图的核心核心点死死锁定在屏幕中央 */
+            background-repeat: no-repeat;
+            background-attachment: scroll;
+            overflow: hidden;
 
-    box-sizing: border-box;
-    padding: 120px 20px 60px;
-    overflow: visible;
-}
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-sizing: border-box;
+        }
 
         .intro-overlay {
             position: absolute;
@@ -140,6 +142,7 @@
             flex-direction: column;
             align-items: center;
             gap: 15px;
+            margin-top: auto;
         }
 
         .content-intro-text h2 {
@@ -187,7 +190,7 @@
         .lz-contact-section-inline {
             width: 100%;
             margin-top: 35px;     /* 控制联系胶囊和上方绿色按钮的距离 */
-
+            margin-bottom: auto;  /* 💡 弹性留白：把下方的4个卡片死死卡在第一屏的最底边缘不动 */
             display: flex;
             justify-content: center;
         }
@@ -229,8 +232,8 @@
             justify-content: center;
             gap: 120px;
             width: 100%;
-            margin-top: 60px;
-            margin-bottom: 60px; /* 💡 核心复习：原本这里是0，在这里你可以随意修改具体的像素，单独把4个大卡片往上提，绝对不影响上方的标题！ */
+            margin-top: 40px;
+            margin-bottom: 40px; /* 💡 核心复习：原本这里是0，在这里你可以随意修改具体的像素，单独把4个大卡片往上提，绝对不影响上方的标题！ */
         }
 
         .stat-item {
@@ -606,7 +609,6 @@
         @media (max-width: 500px) {
             .content { grid-template-columns: 1fr; } /* 手机强制变单列上下整齐排队 */
         }
-
 
 /* ===================== 🎨 1:1 像素级复刻参考图：SMC 核心策略区专属皮肤 ===================== */
 .lz-smc-section {
