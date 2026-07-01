@@ -9,12 +9,23 @@
     <style>
         /* ===================== 🎨 第一关专属：全站基础与导航栏样式 ===================== */
         /* ===================== 🎨 导航栏全平台大满贯自适应样式 ===================== */
-        body {
-            background-color: #050505;
+                /* ===================== 🛡️ 终极全站防晃死锁：彻底消灭手机端横向白边 ===================== */
+        html, body {
+            width: 100%;
+
+            /* 💡 核心必杀技：横向溢出绝对剪切死锁！ */
+            /* 它的底层铁律是：强行告诉手机浏览器，任何大盒子、卡片、或者微弱的像素落差，只要敢横向超出手机屏幕边界一粒沙子的距离，通通全自动在暗中原地物理裁剪、抹杀、隐形 [INDEX]！ */
+            /* 从物理上彻底切断横向传送带，让用户的手指在左右方向怎么戳也绝对晃不动一分一毫，稳如磐石 [INDEX, INDEX]！ */
+            overflow-x: hidden !important;
+
+            background-color: #050505; /* 核心黑金底色 */
             color: #ffffff;
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
         }
+
 
         header {
             height: 90px;
